@@ -1,8 +1,6 @@
-# adr-symfony-course
-Labs para el curso de Symfony
 # Demos y fuentes para el curso de Symfony
 
-Estas demos están basados en la Symfony Demo Application.
+Estas demos están basadas en la Symfony Demo Application.
 
 ## Instalación
 
