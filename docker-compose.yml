@@ -26,7 +26,9 @@ services:
             MYSQL_PASSWORD: sf4
 
     php:
-        image: php:7-fpm
+        build: 
+          context: .
+          dockerfile: .docker/php-fpm
         container_name: sf4_php
         volumes:
           - .:/code
