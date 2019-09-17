@@ -1,6 +1,6 @@
 # Demos y fuentes para el curso de Symfony
 
-Estas demos están basados en la Symfony Demo Application.
+Estas demos están basadas en la Symfony Demo Application.
 
 ## Instalación
 
@@ -9,15 +9,28 @@ A continuación se especifican los comandos necesarios para ejecutar las demos.
 ### Prerrequisitos
 
 Tener instalados:
+
 - Git
 - Docker
 
-### Instalar el repositorio clonándolo de Github:
+### Instalar el repositorio clonándolo de Github
 
-Ejecutar el siguiente script:
+Abrir un terminal en la carpeta personal y ejecutar el siguiente script:
+
 ```bash
-cd
 git clone https://github.com/vitongos/symfony-course.git symfony-src
-chmod +x symfony-src/deploy/*.sh
 ```
 
+### Levantar los contenedores
+
+Abrir un terminal en la carpeta symfony-src y ejecutar el siguiente script:
+
+```bash
+docker-compose up
+```
+
+Ahora se podrá acceder al contenedor de php con el comando:
+
+```bash
+docker exec -it sf4_php bash
+```
