@@ -17,6 +17,7 @@ use App\Events\CommentCreatedEvent;
 use App\Form\CommentType;
 use App\Repository\PostRepository;
 use App\Repository\TagRepository;
+use App\Service\Demo2;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -46,7 +47,7 @@ class BlogController extends AbstractController
      * Content-Type header for the response.
      * See https://symfony.com/doc/current/quick_tour/the_controller.html#using-formats
      */
-    public function index(Request $request, int $page, string $_format, PostRepository $posts, TagRepository $tags): Response
+    public function index(Request $request, int $page, string $_format, PostRepository $posts, TagRepository $tags, Demo2 $demo2): Response
     {
         $tag = null;
         if ($request->query->has('tag')) {
@@ -59,6 +60,7 @@ class BlogController extends AbstractController
         // See https://symfony.com/doc/current/templating.html#template-suffix
         return $this->render('blog/index.'.$_format.'.twig', [
             'paginator' => $latestPosts,
+            'demo2var' => $demo2->getIntegerEnv($this->getParameter('app.demo.var')),
         ]);
     }
 
