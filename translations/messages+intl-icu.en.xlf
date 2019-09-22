@@ -279,6 +279,10 @@
                 <source>menu.homepage</source>
                 <target>Homepage</target>
             </trans-unit>
+            <trans-unit id="menu.hottest">
+                <source>menu.hottest</source>
+                <target>Hottest</target>
+            </trans-unit>
             <trans-unit id="menu.admin">
                 <source>menu.admin</source>
                 <target>Backend</target>

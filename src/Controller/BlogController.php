@@ -63,6 +63,24 @@ class BlogController extends AbstractController
     }
 
     /**
+     * Los posts más calientes siguen una regla extraña:
+     * son los que no comiencen con Lorem
+     * de entre los 5 últimos publicados.
+     * 
+     * @Route("/hottest", methods={"GET"}, name="blog_hottest")
+     */
+    public function hottest(Request $request): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $q = $em->createQuery("select p from App\Entity\Post p order by p.publishedAt desc");
+        $posts = $q->setMaxResults(5)->getResult();
+
+        return $this->render('blog/hottest.html.twig', [
+            'posts' => $posts,
+        ]);
+    }
+
+    /**
      * @Route("/posts/{slug}", methods={"GET"}, name="blog_post")
      *
      * NOTE: The $post controller argument is automatically injected by Symfony
