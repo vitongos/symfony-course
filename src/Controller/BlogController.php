@@ -12,9 +12,11 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
+use App\Entity\Hottest;
 use App\Entity\Post;
 use App\Events\CommentCreatedEvent;
 use App\Form\CommentType;
+use App\Repository\HottestRepository;
 use App\Repository\PostRepository;
 use App\Repository\TagRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -67,13 +69,20 @@ class BlogController extends AbstractController
      * son los que no comiencen con Lorem
      * de entre los 5 últimos publicados.
      * 
+     * Luego cada visita se guarda como un log
+     * en la tabla symfony_demo_hottest.
+     * 
      * @Route("/hottest", methods={"GET"}, name="blog_hottest")
      */
-    public function hottest(Request $request): Response
+    public function hottest(Request $request, HottestRepository $hottestRepository): Response
     {
         $em = $this->getDoctrine()->getManager();
         $q = $em->createQuery("select p from App\Entity\Post p order by p.publishedAt desc");
         $posts = $q->setMaxResults(5)->getResult();
+
+        $visit = new Hottest();
+        $em->persist($visit);
+        $em->flush();
 
         return $this->render('blog/hottest.html.twig', [
             'posts' => $posts,
